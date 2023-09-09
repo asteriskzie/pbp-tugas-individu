@@ -1,2 +1,6 @@
-Hellooo! Yeay finally editing form vim :D 
-Lumayan seru juga kalau udah paham WKKWKW
+Hello! 
+
+Visit the deployed website at https://jam-terbang.adaptable.app/ ^o^
+
+To answer the questions for tugas 2 pbp: 
+
