@@ -1,8 +1,36 @@
-<h1>This is the heading.</h1>
+<head>
+    <title>JamTerbang</title>
+</head>
+<body class="container">
+    <h1><span class="blue">Jam</span><span class="red">Terbang</span></h1>
+    
+    <p>This is a paragraph. I don't even know what to write here. </p>
+    
+    <div class="box">
+        <h4>Name: </h4>
+        <p>{{ name }}<p>
+        <h4>Amount: </h4>
+        <p>{{ amount }}<p>
+        <h4>Description: </h4>
+        <p>{{ description }}</p>
+    </div>
+</body>
+<style>
+.red {
+    color:red; 
+}
+.blue {
+    color:blue; 
+}
+.container {
+    padding: 30px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+.box {
+    padding-left: 15px;  
 
-<p>This is a paragraph.</p>
-
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Class: </h5>
-<p>{{ class }}<p>
+    border-style: solid;
+    border-width: medium;
+    border-color: black;
+}
+</style>
