@@ -1,9 +1,10 @@
 Hello! 
 
-Visit the deployed website at https://jam-terbang.adaptable.app/main ^o^
+Visit the deployed website at https://jam-terbang.adaptable.app/main :D
 
 --- 
 
+### TUGAS 2
 
 #### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 
@@ -44,26 +45,25 @@ from django.shortcuts import render
 
 def show_main(request):
     context = {
-        'name': 'Pak Bepe',
-        'amount': 3,
-        'description': 'Tugas Kuliah'
+        'nama': 'Ester Gracia',
+        'kelas': 'PBP A',
     }
 
     return render(request, "main.html", context)
 ```
-Saya lalu membuat model untuk database. Saya melakukannya dengan mengedit `models.py` dalam aplikasi main. Saya menambahkan model `Activity` dengan field `name`, `amount`, dan `description`. 
+Saya lalu membuat model untuk database. Saya melakukannya dengan mengedit `models.py` dalam aplikasi main. Saya menambahkan model `Item` dengan field `name`, `amount`, dan `description`. 
 
 ```
 from django.db import models
 
 # Create your models here.
-class Jam(models.Model) : 
+class Item(models.Model) : 
     name = models.CharField(max_length=255)
     amount = models.IntegerField()
     description = models.TextField()
     
 ```
-Terakhir, saya tinggal melakukan deploy ke adaptable. 
+Terakhir, saya tinggal melakukan deploy ke adaptable. Saya melakukannya dengan memilih `Python App Template` sebagai template deployment, erta `PostgreSQL` sebagai tipe basis data. Saya memasukkan `python manage.py migrate && gunicorn shopping_list.wsgi` sebagai start command. Saya kemudian memasukkan nama aplikasi sekaligus domain dan juga mencentang `HTTP Listener on PORT` lalu memulai proses deployment. 
 
 #### Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
 
