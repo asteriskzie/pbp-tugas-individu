@@ -2,6 +2,10 @@ Hello!
 
 Visit the deployed website at https://jam-terbang.adaptable.app/main :D
 
+Table of contents: 
+- [Tugas 2](#tugas-2)
+- [Tugas 3](#tugas-3)
+
 --- 
 
 ### TUGAS 2
@@ -99,3 +103,10 @@ Selanjutnya, saya membuat beberapa fungsi views untuk menampilkan data. Untuk HT
 
 Terakhir saya menaruh routingnya di `urls.py`. Penamaannya sesuai dengan cara data deliverynya, misalnya XML bisa diakses di `/xml`, json di `/json`, dan seterusnya. 
 
+#### Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+
+![HTML](img/html.png)
+![XML](img/xml.png)
+![JSON](img/json.png)
+![JSON by ID](img/json-by-id.png)
+![XML by ID](img/json-by-id.png)

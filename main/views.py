@@ -14,9 +14,11 @@ from django.db.models import Sum
 # Create your views here.
 def show_main(request):
     items = Item.objects.all()
-    print(items)
+    
+    # get the sum of a column
+    # from https://stackoverflow.com/questions/8616343/django-calculate-the-sum-of-the-column-values-through-query
     sum = Item.objects.aggregate(Sum('amount'))['amount__sum']
-    print(sum)
+    
     context = {
         'nama': 'Ester Gracia',
         'kelas': 'PBP A',
