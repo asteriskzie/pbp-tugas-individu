@@ -77,3 +77,25 @@ Kita menggunakan virtual environment supaya tidak terjadi conflict antar 2 versi
 #### Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya!
 
 Pada MVC (Model, View, Controller), Model berurusan dengan database, Controller mengatur routing ke View (tampilan) yang sesuai dengan request. Pada MVT (Model, View, Template), mirip seperti MVC hanya saja View MVT berperan seperti Controller MCV dan Template MVT berperan seperti View MVC. Pada MVVM (Model, View, ViewModel), terdapat ViewModel yang menghubungkan View dan Model. 
+
+---
+### TUGAS 3
+
+#### Apa perbedaan antara form POST dan form GET dalam Django?
+POST untuk mengirim data ke database, sementara GET untuk mendapatkan data dari database. 
+
+#### Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+
+Beda formatnya, kalau XML menampilkan data dengan dibungkus oleh tag yang mendeskripsikan data tersebut sehingga bersifat *self-descriptive*, kalau JSON berbentuk *key-value* mirip seperti *dictionary* pada Python (meskipun JSON sebenernya dikirim dalam bentuk teks), kalau HTML menggunakan tag-tag struktur web seperti tag paragraf, heading, dll. 
+
+####  Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+Karena JSON menggunkan format yang mudah dibaca oleh manusia. Selain itu, struktur JSON mirip dengan format struktur data pada berbagai bahasa pemrograman lain, misalnya dictionary Python dan object JavaScript. 
+
+####  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Pertama, buat input form. Saya menambahkan fungsi add_item pada `views.py`. Saya lalu membuat file html untuk tampilannya di `main/templates`. Kemudian, saya tinggal mengatur rounting di urls.py. 
+
+Selanjutnya, saya membuat beberapa fungsi views untuk menampilkan data. Untuk HTML, mirip dengan pada tampilan utama. Untuk sisanya, saya menggunakan serializers sesuai dengan tipe data delivery nya. Misalnya, untuk XML, menggunakan serializers XML. 
+
+Terakhir saya menaruh routingnya di `urls.py`. Penamaannya sesuai dengan cara data deliverynya, misalnya XML bisa diakses di `/xml`, json di `/json`, dan seterusnya. 
+

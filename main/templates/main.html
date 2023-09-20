@@ -1,31 +1,37 @@
-<head>
-    <title>JamTerbang</title>
-</head>
-<body class="container">
-    <h1><span class="blue">Jam</span><span class="red">Terbang</span></h1>
+{% extends 'base.html' %} 
+{% block meta %}
+<title>JamTerbang</title>
+{% endblock meta %} 
 
-    <div class="box">
-        <h4>Nama:</h4>
-        <p>{{  nama  }}</p>
-        <h4>Kelas:</h4>
-        <p>{{  kelas }}</p>
-    </div>
-</body>
-<style>
-.red {
-    color:red; 
-}
-.blue {
-    color:blue; 
-}
-.container {
-    padding: 30px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-}
-.box {
-    padding: 15px;
-    border-style: solid;
-    border-width: medium;
-    border-color: black;
-}
-</style>
+{% block content %}
+<h1><span>Jam</span><span>Terbang</span></h1>
+
+<div>
+    <h4>Nama:</h4>
+    <p>{{ nama }}</p>
+    <h4>Kelas:</h4>
+    <p>{{ kelas }}</p>
+</div>
+
+<p> Ada total {{ sum }} item</p>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Description</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.amount }}</td>
+        <td>{{ item.description }}</td>
+    </tr>
+    {% endfor %} 
+</table>
+<br /> 
+
+<a href="{% url 'main:add_item' %}">
+    <button>Add New Item</button>
+</a>
+
+{% endblock content %}
