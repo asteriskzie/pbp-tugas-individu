@@ -24,6 +24,8 @@ def show_main(request):
     # get the sum of a column
     # from https://stackoverflow.com/questions/8616343/django-calculate-the-sum-of-the-column-values-through-query
     sum = Item.objects.aggregate(Sum('amount'))['amount__sum']
+    if sum is None : 
+        sum = 0
     
     context = {
         'nama': 'Ester Gracia',
