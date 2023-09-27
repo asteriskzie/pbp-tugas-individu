@@ -17,21 +17,27 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+import datetime
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
+
 @login_required(login_url='/login')
 def show_main(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(user=request.user)
     
     # get the sum of a column
     # from https://stackoverflow.com/questions/8616343/django-calculate-the-sum-of-the-column-values-through-query
-    sum = Item.objects.aggregate(Sum('amount'))['amount__sum']
+    sum = items.aggregate(Sum('amount'))['amount__sum']
     if sum is None : 
         sum = 0
     
     context = {
-        'nama': 'Ester Gracia',
+        'nama': request.user.username,
         'kelas': 'PBP A',
         'items' : items,
         'sum': sum,
+        'last_login': request.COOKIES['last_login'],
+
     }
 
     return render(request, "main.html", context)
@@ -40,7 +46,9 @@ def add_item(request) :
     form = ItemForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        form.save()
+        item = form.save(commit=False)
+        item.user = request.user 
+        item.save()
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {'form': form}
@@ -88,7 +96,9 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('main:show_main')
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
@@ -96,4 +106,20 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('main:login')
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+
+@login_required
+def increment_item(request, id) : 
+    data = Item.objects.get(pk=id)
+    data.amount+=1
+    data.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+@login_required
+def decrement_item(request, id) : 
+    data = Item.objects.get(pk=id)
+    data.amount-=1
+    data.save()
+    return HttpResponseRedirect(reverse('main:show_main'))

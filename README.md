@@ -110,3 +110,47 @@ Terakhir saya menaruh routingnya di `urls.py`. Penamaannya sesuai dengan cara da
 ![JSON](img/json.png)
 ![JSON by ID](img/json-by-id.png)
 ![XML by ID](img/json-by-id.png)
+
+### TUGAS 3
+
+#### Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+
+Django UserCreationForm adalah sistem bawaan dari Django untuk membuat user baru pada aplikasi kita. UserCreationForm mengumpulkan informasi tentang username, password, serta konfirmasi password. UserCreationForm juga sudah didukung dengan verifikasi, misalnya password harus kuat, username tidak duplikat, dan lain-lain. 
+
+Kelebihannya adalah mudah digunakan serta integrasi yang mudah dengan fitur-fitur bawaan Django lainnya. 
+
+Kekurangannya adalah terbatasnya field yang ditawarkan, hanya username dan password (tidak ada email dll). 
+
+#### Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+
+Autentikasi artinya verifikasi identitas pengguna untuk memastikan bahwa pengguna itu benar-benar sesuai dengan identitas yang ia klaim. Contohnya penggunaan password mengautentikasi bahwa seseorang yang mengklaim suatu username adalah benar pemilik username tersebut. 
+
+Otorisasi artinya penentuan akses pada pengguna  sesuai dengan ketentuan aplikasi kita. Contohnya di SCELE asdos bisa mengakses page untuk memberikan nilai tugas, tetapi mahasiswa tidak bisa. 
+
+Keduanya penting untuk alasan keamanan dan keberlangsungan aplikasi kita. Bayangkan jika tidak ada keduanya, sistem user akan jadi kacau dan tidak berguna karena semua orang bisa mengaku-ngaku menjadi siapapun dan bisa mengakses apapun. 
+
+#### Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+
+Cookies adalah sebagian kecil data yang disimpan pada browser pengguna dalam bentuk teks. Kita bisa menggunakan cookies pada aplikasi Django dengan menggunakan `response.set_cookie` untuk menyimpan data pada cookie dan `request.COOKIES` untuk mengambil data dari cookie. 
+
+#### Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+
+Jika kita mengimplementasikan cookies dengan benar maka bisa aman-aman saja. Meski demikian, ada beberapa risiko yang perlu diwaspadai yang membuat kita harus berhati-hati mengimplementasikan cookies, seperti Serangan Cross-Site Scripting (XSS) di mana penyerang menyisipkan kode berbahaya pada halaman web kita ketika cookies dikirim ke server dari browser pengguna.  
+
+#### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Pertama, saya menambahkan fungsi untuk register, login, dan logout pada views.py aplikasi main. Saya menggunakan fasilitas bawaan Django untuk mempermudah membuat fungsi-fungsi tersebut yang terdapat dari `django.contrib.auth.forms`, yakni: 
+- Pada fungsi register, saya memanfaatkan class `UserCreationForm`. 
+- Pada fungsi login, saaya memanfaatkan fungsi `authenticate` serta `login`
+- Pada fungsi logout, saya memanfaatkan fungsi `logout`
+
+Saya lalu menghubungakan model user dengan Item, jadi setiap Item dimiliki oleh satu user. Untuk itu saya menambahkan field user pada model Item, yang berupa sebuah foreign key (menyatakan hubungan many-to-one).
+
+Kemudian saya mengubah `main.html`. Kali ini, barang yang ditampilkan hanyalah barang milik user yang sekarang sedang logged in. Selain itu, nama yang ditampilkan adalah nama user yang logged in. 
+
+Setelah itu, saya membuat dua akun pengguna dengan 
+masing-masing tiga dummy data melalui interface aplikasi yang sudah jadi sejauh ini, diakses melalui `http://localhost:8000/`. 
+
+Terakhir saya mengimplementasikan cookies untuk menyimpan data last logged in. Saya melakukannya dengan memanggil `response.set_cookies` setiap kali user log in untuk menyimpan kapan dia log in pada cookeis, lalu `request.COOKIES` untuk mengambil data terakhir log in. Data terakhir log in tersebut saya tampilkan juga di `main.html`. 
+
+Untuk bonus, saya mengimplementasikannya dengan membuat views increment dan decrement untuk berurusan dengan mengubah amount suatu item pada database. Selain itu, saya menambahkan button yang mengirimkan post request ke URL yang memanggil views increment dan decrement tersebut. 

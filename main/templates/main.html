@@ -7,37 +7,57 @@
 <h1><span>Jam</span><span>Terbang</span></h1>
 
 <div>
-    <h4>Nama:</h4>
-    <p>{{ nama }}</p>
-    <h4>Kelas:</h4>
-    <p>{{ kelas }}</p>
+    <div>
+        <h4>Nama:</h4>
+        <p>{{ nama }}</p>
+    </div>
+    <div>
+        <h4>Kelas:</h4>
+        <p>{{ kelas }}</p>
+    </div>
 </div>
 
-<p> Ada total {{ sum }} item</p>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Amount</th>
-        <th>Description</th>
-    </tr>
-    {% for item in items %}
-    <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.amount }}</td>
-        <td>{{ item.description }}</td>
-    </tr>
-    {% endfor %} 
-</table>
-<br /> 
+<div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td style="display:flex; flex-direction:row; justify-content: center; gap:5px; ">
+                <form action="{% url 'main:increment_item' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button>+</button>
+                </form>
+                {{ item.amount }}
+                <form action="{% url 'main:decrement_item' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button>-</button>
+                </form>
+          </td>
+            </td>
+            <td>{{ item.description }}</td>
+        </tr>
+        {% endfor %} 
+    </table>
+    
+    <p> Kamu menyimpan {{ sum }} item</p>
+    
+    <a href="{% url 'main:add_item' %}">
+        <button>Add New Item</button>
+    </a>
+</div>
 
-<a href="{% url 'main:add_item' %}">
-    <button>Add New Item</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
+<div>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
+</div>
 
 {% endblock content %}
