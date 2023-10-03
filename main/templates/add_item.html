@@ -1,16 +1,16 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Add New Product</h1>
+<h1 class="text-center">Add New Item</h1>
 
 <form method="POST">
     {% csrf_token %}
-    <table>
+    <table class="table form-group">
         {{ form.as_table }}
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Add Product"/>
+                <input class="btn btn-primary" type="submit" value="Add Product"/>
             </td>
         </tr>
     </table>

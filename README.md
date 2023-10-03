@@ -5,6 +5,8 @@ Visit the deployed website at https://jam-terbang.adaptable.app/main :D
 Table of contents: 
 - [Tugas 2](#tugas-2)
 - [Tugas 3](#tugas-3)
+- [Tugas 4](#tugas-4)
+- [Tugas 5](#tugas-5)
 
 --- 
 
@@ -111,7 +113,7 @@ Terakhir saya menaruh routingnya di `urls.py`. Penamaannya sesuai dengan cara da
 ![JSON by ID](img/json-by-id.png)
 ![XML by ID](img/json-by-id.png)
 
-### TUGAS 3
+### TUGAS 4
 
 #### Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
 
@@ -154,3 +156,45 @@ masing-masing tiga dummy data melalui interface aplikasi yang sudah jadi sejauh 
 Terakhir saya mengimplementasikan cookies untuk menyimpan data last logged in. Saya melakukannya dengan memanggil `response.set_cookies` setiap kali user log in untuk menyimpan kapan dia log in pada cookeis, lalu `request.COOKIES` untuk mengambil data terakhir log in. Data terakhir log in tersebut saya tampilkan juga di `main.html`. 
 
 Untuk bonus, saya mengimplementasikannya dengan membuat views increment dan decrement untuk berurusan dengan mengubah amount suatu item pada database. Selain itu, saya menambahkan button yang mengirimkan post request ke URL yang memanggil views increment dan decrement tersebut. 
+
+### TUGAS 5
+#### Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+1. Universal selector (*)
+   - Memilih semua elemen dalam dokumen 
+   - Tepat digunakan untuk style basic yang diterapkan di semua elemen, misalnya padding atau margin 
+2. Tag selector 
+   - Memilih semua elemen dengan tag tertentu dalam dokumen
+   - Tepat digunakan untuk mengatur style basic semua elemen dengan suatu tag, misalnya ingin mengatur style untuk table maka kida menggunakan selector table. 
+3. ID selector (#) 
+   - Memilih elemen berdasarkan atribut `id`
+   - Tepat digunakan ketika mengatur satu elemen khusus yang memiliki atribut `id` unik 
+4. Class selector (.) 
+   - Memilih elemen-elemen berdasarkan atribut `class`
+   - Tepat digunakan untuk mengatur style yang sama untuk beberapa elemen dengan class yang sama
+5. Atribute Selector ([attr="value"])
+   - Memilih elemen berdasarkan nilai atribut tertentu 
+   - Tepat digunakan ketika mau mengganti behavior elemen berdasarkan suatu atribut dan nilai
+6. Pseudo-class Selector (:)
+   - Memilih elemen berdasarkan keadaan atau interaksi pengguna 
+   - Tepat digunakan untuk mengatur elemen berdasarkan situasi tertentu, misalnya ketika kursor berada di atas elemen (`:hover`)
+
+#### Jelaskan HTML5 Tag yang kamu ketahui.
+- Ada tag-tag yang mendefinisikan bagian dari suatu webpage seperti `<nav>`, `<header>`, `<footer>`, `<article>`, `<section>`. 
+- Ada elemen grafis seperti `<svg>` dan `<canvas>`
+- Ada elemen multimedia seperti `<audio>` dan `<video>`
+ 
+#### Jelaskan perbedaan antara margin dan padding.
+
+Padding merepresentasikan inner space dari suatu elemen (yaitu space dari tepi elemen ke dalam), sementara margin merepresentasikan space di sekitar elemen (dari tepi elemen ke luar). 
+
+Padding bisa dimanfaatkan untuk mengubah ukuran elemen serta memberikan space antara border dan content supaya lebih enak dilihat. Margi bisa dimanfaatkan untuk mengatur posisi elemen, membuat elemen yang overlap (dengan margin negatif), serta mengatur jarak antar elemen. 
+
+![Alt text](image.png)
+
+(Sumber dan gambar dari https://mailchimp.com/resources/padding-vs-margin/)
+
+#### Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+
+Framework Tailwind membuat kita bisa menerapkan styling dengan menggunakan class-class yang sudah didefinisikan oleh Tailwind, sehingga kita tidak perlu lagi menuliskan CSS sendiri untuk menerapkan suatu tyle. Di sisi lain, Framework Bootstrap berfokus pada penyediaan komponen-komponen jadi dengan gaya bawaan.
+
+Kita sebaiknya menggunakan Bootstrap daripada Tailwind ketika hendak membuat website dengan cepat dan mudah tanpa terlalu memedulikan kustomisasi desain. Sebaliknya, kita lebih baik menggunakan Tailwind daripada Bootstrap ketika menginginkan berbagai website yang unik dengan kustomisasi desain sendiri.

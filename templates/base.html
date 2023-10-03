@@ -1,44 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         {% block meta %}
         {% endblock meta %}
     </head>
-    <body>
-        {% block content %}
-        {% endblock content %}
+    <body class="">
+        <nav class="navbar bg-dark text-light">
+            <h1>JamTerbang</h1>
+        </nav>
+        <div class="p-4">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>
-<style>
-    body {
-        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border: 1px solid #ddd; /* Add a border around the table */
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: center;
-        border-bottom: 1px solid #ddd; /* Add a bottom border to cells */
-    }
-
-    th {
-        background-color: #f2f2f2; /* Gray background for table headers */
-    }
-
-    .user-data {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-</style>

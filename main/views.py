@@ -35,8 +35,9 @@ def show_main(request):
         'nama': request.user.username,
         'kelas': 'PBP A',
         'items' : items,
+        'most-items': items.order_by('amount').values(),
         'sum': sum,
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login'),
 
     }
 

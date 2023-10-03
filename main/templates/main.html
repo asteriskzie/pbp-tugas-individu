@@ -4,60 +4,79 @@
 {% endblock meta %} 
 
 {% block content %}
-<h1><span>Jam</span><span>Terbang</span></h1>
-
-<div>
+<div class=" d-flex flex-column">
     <div>
-        <h4>Nama:</h4>
-        <p>{{ nama }}</p>
+        <div>
+            <h4>Nama:</h4>
+            <p>{{ nama }}</p>
+        </div>
+        <div>
+            <h4>Kelas:</h4>
+            <p>{{ kelas }}</p>
+        </div>
     </div>
+    
+    <!-- <div class="d-flex gap-3"> 
+        <p>Your most item: </p>
+        {% for item in items %} 
+            <div class="card p-3">
+                {{ item.name }}
+                <div>
+                    {{ item.amount }}
+                </div>
+            </div>
+        {% endfor %}
+    </div> -->
+    
     <div>
-        <h4>Kelas:</h4>
-        <p>{{ kelas }}</p>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td class="d-flex gap-2">
+                    
+                    <form action="{% url 'main:decrement_item' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-secondary">-</button>
+                    </form>
+                    <div>
+                        {{ item.amount }}
+                    </div>
+                    <form action="{% url 'main:increment_item' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-secondary">+</button>
+                    </form>
+                    
+              </td>
+                </td>
+                <td>{{ item.description }}</td>
+            </tr>
+            {% endfor %} 
+        </table>
+    
+        
+    
+    
+        <p> Kamu menyimpan {{ sum }} item</p>
+        
+        <a href="{% url 'main:add_item' %}">
+            <button class="btn btn-primary">Add New Item</button>
+        </a>
     </div>
-</div>
-
-<div>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Description</th>
-        </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td style="display:flex; flex-direction:row; justify-content: center; gap:5px; ">
-                <form action="{% url 'main:increment_item' item.id %}" method="post">
-                    {% csrf_token %}
-                    <button>+</button>
-                </form>
-                {{ item.amount }}
-                <form action="{% url 'main:decrement_item' item.id %}" method="post">
-                    {% csrf_token %}
-                    <button>-</button>
-                </form>
-          </td>
-            </td>
-            <td>{{ item.description }}</td>
-        </tr>
-        {% endfor %} 
-    </table>
     
-    <p> Kamu menyimpan {{ sum }} item</p>
+    <div class="align-self-end">
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        <a href="{% url 'main:logout' %}">
+            <button class="btn btn-primary">
+                Logout
+            </button>
+        </a>
+    </div>
     
-    <a href="{% url 'main:add_item' %}">
-        <button>Add New Item</button>
-    </a>
+    {% endblock content %}
 </div>
-
-<div>
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
-</div>
-
-{% endblock content %}
