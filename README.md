@@ -179,9 +179,9 @@ Untuk bonus, saya mengimplementasikannya dengan membuat views increment dan decr
    - Tepat digunakan untuk mengatur elemen berdasarkan situasi tertentu, misalnya ketika kursor berada di atas elemen (`:hover`)
 
 #### Jelaskan HTML5 Tag yang kamu ketahui.
-- Ada tag-tag yang mendefinisikan bagian dari suatu webpage seperti `<nav>`, `<header>`, `<footer>`, `<article>`, `<section>`. 
-- Ada elemen grafis seperti `<svg>` dan `<canvas>`
-- Ada elemen multimedia seperti `<audio>` dan `<video>`
+- Ada tag-tag yang mendefinisikan bagian dari suatu webpage seperti `<nav>`, `<header>`, `<footer>`, `<article>`, `<section>`. Elemen-elemen ini penggunaannya bisa dianggap mirip dengan `<div>` yang sintaksnya lebih *self-eplanatory*. 
+- Ada elemen grafis seperti `<svg>` dan `<canvas>`. Fungsinya mirip-mirip karena sama-sama menampilkan grafis, tapi lebih lanjutnya `<svg>` biasanya untuk grafis yang lebih flat dan sederhana sementara `<canvas>` untuk yang lebih kompleks.
+- Ada elemen multimedia seperti `<audio>` dan `<video>` untuk menambahkan audio dan video. 
  
 #### Jelaskan perbedaan antara margin dan padding.
 
@@ -189,7 +189,7 @@ Padding merepresentasikan inner space dari suatu elemen (yaitu space dari tepi e
 
 Padding bisa dimanfaatkan untuk mengubah ukuran elemen serta memberikan space antara border dan content supaya lebih enak dilihat. Margi bisa dimanfaatkan untuk mengatur posisi elemen, membuat elemen yang overlap (dengan margin negatif), serta mengatur jarak antar elemen. 
 
-![Alt text](image.png)
+![margin vs padding](img/margin-padding.png)
 
 (Sumber dan gambar dari https://mailchimp.com/resources/padding-vs-margin/)
 

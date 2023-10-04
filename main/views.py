@@ -24,13 +24,13 @@ from django.urls import reverse
 @login_required(login_url='/login')
 def show_main(request):
     items = Item.objects.filter(user=request.user)
-    
+    last_item_id = items.last().id
     # get the sum of a column
     # from https://stackoverflow.com/questions/8616343/django-calculate-the-sum-of-the-column-values-through-query
     sum = items.aggregate(Sum('amount'))['amount__sum']
     if sum is None : 
         sum = 0
-    
+
     context = {
         'nama': request.user.username,
         'kelas': 'PBP A',
@@ -38,7 +38,7 @@ def show_main(request):
         'most-items': items.order_by('amount').values(),
         'sum': sum,
         'last_login': request.COOKIES.get('last_login'),
-
+        'last_item_id': last_item_id
     }
 
     return render(request, "main.html", context)

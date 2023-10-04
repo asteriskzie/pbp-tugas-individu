@@ -26,8 +26,10 @@
                 </div>
             </div>
         {% endfor %}
-    </div> -->
-    
+    </div> -->  
+    <p> ini </p>
+
+    <p> itu </p>
     <div>
         <table class="table">
             <tr>
@@ -36,8 +38,30 @@
                 <th>Description</th>
             </tr>
             {% for item in items %}
+
+            {% if item.id == last_item_id %} 
             <tr>
-                <td>{{ item.name }}</td>
+                <td style="color: red;">{{ item.name }} hah  </td>
+                <td style="color: red;" class="d-flex gap-2">
+                    
+                    <form action="{% url 'main:decrement_item' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-secondary">-</button>
+                    </form>
+                    <div>
+                        {{ item.amount }}
+                    </div>
+                    <form action="{% url 'main:increment_item' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-secondary">+</button>
+                    </form>
+                    
+                </td>                    
+                <td style="color: red;">{{ item.description }}</td>
+            </tr>
+            {% else %}
+            <tr >
+                <td>{{ item.name }} {{ item.id }}</td>
                 <td class="d-flex gap-2">
                     
                     <form action="{% url 'main:decrement_item' item.id %}" method="post">
@@ -56,6 +80,7 @@
                 </td>
                 <td>{{ item.description }}</td>
             </tr>
+            {% endif %}
             {% endfor %} 
         </table>
     
@@ -77,6 +102,6 @@
             </button>
         </a>
     </div>
-    
+
     {% endblock content %}
 </div>
