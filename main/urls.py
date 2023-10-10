@@ -18,4 +18,6 @@ urlpatterns = [
     path('item/<int:id>/increment', increment_item, name='increment_item'),
     path('item/<int:id>/decrement', decrement_item, name='decrement_item'),
     
-]
+    path('user/items/', get_user_items, name='get_user_items'),
+    path('create-ajax', add_user_item, name='add_user_item'),
+]  

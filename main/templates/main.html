@@ -28,17 +28,19 @@
         {% endfor %}
     </div> -->  
     <div>
-        <table class="table">
+        <table class="table" id="item_table"></table>
+
+        <!-- <table class="table">
             <tr>
                 <th>Name</th>
                 <th>Amount</th>
                 <th>Description</th>
             </tr>
             {% for item in items %}
-
+            
             {% if item.id == last_item_id %} 
             <tr>
-                <td style="color: red;">{{ item.name }} hah  </td>
+                <td style="color: red;">{{ item.name }} </td>
                 <td style="color: red;" class="d-flex gap-2">
                     
                     <form action="{% url 'main:decrement_item' item.id %}" method="post">
@@ -58,7 +60,7 @@
             </tr>
             {% else %}
             <tr >
-                <td>{{ item.name }} {{ item.id }}</td>
+                <td>{{ item.name }}</td>
                 <td class="d-flex gap-2">
                     
                     <form action="{% url 'main:decrement_item' item.id %}" method="post">
@@ -79,10 +81,7 @@
             </tr>
             {% endif %}
             {% endfor %} 
-        </table>
-    
-        
-    
+        </table> -->
     
         <p> Kamu menyimpan {{ sum }} item</p>
         
@@ -90,6 +89,8 @@
             <button class="btn btn-primary">Add New Item</button>
         </a>
     </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
     
     <div class="align-self-end">
         <h5>Sesi terakhir login: {{ last_login }}</h5>
@@ -100,5 +101,79 @@
         </a>
     </div>
 
-    {% endblock content %}
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function getItems() {
+        return fetch("{% url 'main:get_user_items' %}")
+            .then((res) => res.json())
+    }
+
+    function addItem() {
+        fetch("{% url 'main:add_user_item' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItems)
+
+        document.getElementById("form").reset()
+        return false
+    }
+    document.getElementById("button_add").onclick = addItem
+
+    async function refreshItems() {
+        const items = await getItems(); 
+        document.getElementById("item_table").innerHTML = "";
+        let htmlString = `
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>`
+        console.log(items)
+        items.forEach((item) => {
+        htmlString += `\n
+            <tr>
+                <td>${item.fields.name}</td>
+                <td>${item.fields.amount}</td>
+                <td>${item.fields.description}</td>
+            </tr>` 
+        })
+
+        document.getElementById("item_table").innerHTML = htmlString
+    }
+
+    refreshItems()
+</script>
+{% endblock content %}
