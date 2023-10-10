@@ -7,6 +7,7 @@ Table of contents:
 - [Tugas 3](#tugas-3)
 - [Tugas 4](#tugas-4)
 - [Tugas 5](#tugas-5)
+- [Tugas 6](#tugas-6)
 
 --- 
 
@@ -198,3 +199,25 @@ Padding bisa dimanfaatkan untuk mengubah ukuran elemen serta memberikan space an
 Framework Tailwind membuat kita bisa menerapkan styling dengan menggunakan class-class yang sudah didefinisikan oleh Tailwind, sehingga kita tidak perlu lagi menuliskan CSS sendiri untuk menerapkan suatu tyle. Di sisi lain, Framework Bootstrap berfokus pada penyediaan komponen-komponen jadi dengan gaya bawaan.
 
 Kita sebaiknya menggunakan Bootstrap daripada Tailwind ketika hendak membuat website dengan cepat dan mudah tanpa terlalu memedulikan kustomisasi desain. Sebaliknya, kita lebih baik menggunakan Tailwind daripada Bootstrap ketika menginginkan berbagai website yang unik dengan kustomisasi desain sendiri.
+
+
+### TUGAS 6 
+#### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+Dalam asynchronous programming, proses dijalankan satu persatu secara berurutan. Sementara dalam asynchronous programming, beberapa proses bisa berjalan bersamaan, tidak perlu menunggu proses sebelumnya selesai terlebih dahulu.
+
+#### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+Event-driven programming adalah paradigma pemrograman ketika suatu program dijalankan setelah ada pemicu event yang terjadi. Contohnya pada tugas ini adalah ketika kita mengklik tombol untuk menambahkan item menggunakan AJAX, muncul modal form untuk menambahkan item. 
+
+#### Jelaskan penerapan asynchronous programming pada AJAX.
+Penerapan asynchronus programming pada AJAX adalah ketika kita mengirim request ke server, kita tidak perlu menunggu response dari server untuk menjalankan kode selanjutnya. Kita bisa menabahkan keyword `async` pada function yang mengirim request ke server, lalu menambahkan keyword `await` sebelum `fetch` untuk menunggu response dari server.
+
+#### Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+Fetch API adalah API standar dari JavaScript yang lebih modern, ringan, dan mudah digunakan. Sementara itu, jQuery adalah library JavaScript yang sudah ada sejak lama dan lebih lengkap serta punya kompatibilitas lintas browser. 
+
+#### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Pertama saya membuat fungsi untuk mendapatkan item dari user menggunakan ajax di `views.py`. Isi fungsinya adalah mengambil object milik `request.user` dari database, lalu mengembalikan data dalam bentuk JSON. Kemudian saya mengatur routingnya di `urls.py` dengan nama `get_user_items` dan endpoint `/user/items`. Saya lalu mengubah cara menampilkan data item di `main.html` jadi menggunakan JavaScript dan AJAX. Saya menambahkan fungsi `getItem` dan `refreshItems` untuk menampilkan data menggunakan AJAX lalu merefresh halaman secara otomatis.
+
+Selanjutnya saya membuat fungsi di `views.py` untuk menambahkan item user menggunakan ajax. Fungsi itu adalah `add_user_item` yang mengambil data dari `request.POST`, lalu menambahkan item baru ke database. Saya lalu mengatur routingnya di `urls.py` dengan nama `add_user_item` dan endpoint `/create-ajax`. Saya lalu menambahkan fungsi `addItem` di `main.html` untuk mengirim request ke endpoint `/create-ajax` menggunakan AJAX lalu merefresh halaman secara otomatis.
+
+Terakhir untuk menjalankan operasi `collectstatic`, saya membuat file `static` pada root proyek dan menambahkan `STATIC_ROOT = 'static/'` di `settings.py`. Saya lalu menjalankan `python manage.py collectstatic` untuk mengumpulkan static files ke folder `static` yang baru saja saya buat.

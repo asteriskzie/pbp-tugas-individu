@@ -151,6 +151,6 @@ def add_user_item(request) :
         new_item = Item(name=name, amount=amount, description=description, user=user)
         new_item.save()
 
-        return HttpResponse(b"CREATED", status=201)
+        return HttpResponse("CREATED", status=201)
 
     return HttpResponseNotFound()
