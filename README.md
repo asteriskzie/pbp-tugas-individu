@@ -220,4 +220,4 @@ Pertama saya membuat fungsi untuk mendapatkan item dari user menggunakan ajax di
 
 Selanjutnya saya membuat fungsi di `views.py` untuk menambahkan item user menggunakan ajax. Fungsi itu adalah `add_user_item` yang mengambil data dari `request.POST`, lalu menambahkan item baru ke database. Saya lalu mengatur routingnya di `urls.py` dengan nama `add_user_item` dan endpoint `/create-ajax`. Saya lalu menambahkan fungsi `addItem` di `main.html` untuk mengirim request ke endpoint `/create-ajax` menggunakan AJAX lalu merefresh halaman secara otomatis.
 
-Terakhir untuk menjalankan operasi `collectstatic`, saya membuat file `static` pada root proyek dan menambahkan `STATIC_ROOT = 'static/'` di `settings.py`. Saya lalu menjalankan `python manage.py collectstatic` untuk mengumpulkan static files ke folder `static` yang baru saja saya buat.
+Terakhir untuk menjalankan operasi `collectstatic`, saya membuat file `static` pada root proyek dan menambahkan `STATIC_ROOT = os.path.join(BASE_DIR, 'static')`. Saya lalu menjalankan `python manage.py collectstatic` untuk mengumpulkan static files ke folder `static` yang baru saja saya buat.
