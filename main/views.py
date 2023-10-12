@@ -23,6 +23,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -152,5 +153,33 @@ def add_user_item(request) :
         new_item.save()
 
         return HttpResponse("CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+@login_required
+def increment_user_item (request) : # using ajax 
+    if request.method == 'PATCH':
+        data = json.loads(request.body.decode('utf-8'))
+        item = Item.objects.get(pk=data.get("id"))
+        item.amount+=1
+        item.save()
+        return HttpResponse("OK", status=200)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+@login_required
+def decrement_user_item (request) : 
+    if request.method == 'PATCH':
+        data = json.loads(request.body.decode('utf-8'))
+        item = Item.objects.get(pk=data.get("id"))
+        item.amount-=1
+
+        if (item.amount >= 0) :
+            item.save()
+            return HttpResponse("OK", status=200)
+        else : 
+            return HttpResponse("BAD REQUEST", status=400)
 
     return HttpResponseNotFound()
