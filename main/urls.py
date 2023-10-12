@@ -20,6 +20,7 @@ urlpatterns = [
     
     path('user/items/', get_user_items, name='get_user_items'),
     path('create-ajax', add_user_item, name='add_user_item'),
+    path('delete-ajax', delete_user_item, name='delete_user_item'),
     path('increment-ajax', increment_user_item, name='increment_user_item'),
     path('decrement-ajax', decrement_user_item, name='decrement_user_item'),
 ]  

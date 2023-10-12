@@ -148,6 +148,16 @@
             .then((res) => res.json())
     }
 
+    function deleteItem(id) {
+        alert("Deleting item with id " + id)
+        fetch("{% url 'main:delete_user_item' %}", {
+            method: "DELETE",
+            body: JSON.stringify({
+                id : id
+            })
+        }).then(refreshItems)
+    }
+
     function addItem() {
         fetch("{% url 'main:add_user_item' %}", {
             method: "POST",
@@ -192,8 +202,6 @@
                 buttonClass += " bg-light text-dark";
             }
 
-
-
             htmlString += `\n
             <div class="${cardClass}" id="item-${id}">
                 <h2>
@@ -207,6 +215,7 @@
                 <div>
                     ${ item.description }
                 </div>
+                <button class="btn btn-sm btn-danger absolute" onclick="deleteItem(${id})">X</button>
             </div>
             ` 
         }

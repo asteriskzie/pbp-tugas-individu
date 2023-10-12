@@ -183,3 +183,14 @@ def decrement_user_item (request) :
             return HttpResponse("BAD REQUEST", status=400)
 
     return HttpResponseNotFound()
+
+@csrf_exempt
+@login_required
+def delete_user_item (request) : 
+    if request.method == 'DELETE':
+        data = json.loads(request.body.decode('utf-8'))
+        item = Item.objects.get(pk=data.get("id"))
+        item.delete()
+        return HttpResponse("OK", status=200)
+
+    return HttpResponseNotFound()
