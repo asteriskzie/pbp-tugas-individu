@@ -73,7 +73,6 @@ def show_xml(request):
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    print("inside show json");
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
@@ -90,6 +89,12 @@ def register(request) :
 
     if request.method == "POST":
         form = UserCreationForm(request.POST)
+        
+        print("inside request.POST: ")
+        print(request.POST)
+        print("inside form: ")
+        print(form)
+
         if form.is_valid():
             form.save()
             messages.success(request, 'Your account has been successfully created!')
@@ -216,3 +221,7 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+
+def get_product_flutter(request, id):
+    data = Item.objects.filter(user=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
