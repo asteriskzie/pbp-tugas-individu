@@ -32,7 +32,7 @@ PRODUCTION = env.bool('PRODUCTION', False)
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://*.pbp.cs.ui.ac.id']
 
 # Application definition
 

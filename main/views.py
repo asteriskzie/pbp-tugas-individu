@@ -73,6 +73,7 @@ def show_xml(request):
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
+    print("inside show json");
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
@@ -214,5 +215,4 @@ def create_product_flutter(request):
 
         return JsonResponse({"status": "success"}, status=200)
     else:
-        print("methodnya salah bro")
         return JsonResponse({"status": "error"}, status=401)
