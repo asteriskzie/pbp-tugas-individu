@@ -193,4 +193,26 @@ def delete_user_item (request) :
         item.delete()
         return HttpResponse("OK", status=200)
 
-    return HttpResponseNotFound()
+    return HttpResponseNotFound() 
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+
+        print(request.user)
+
+        new_product = Item.objects.create(
+            user = request.user,
+            name = data["name"],
+            amount = int(data["amount"]),
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        print("methodnya salah bro")
+        return JsonResponse({"status": "error"}, status=401)

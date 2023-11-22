@@ -198,21 +198,21 @@
             let cardClass="card p-3"; 
             let buttonClass = "btn btn-sm btn-secondary";
             if (i+1 == items.length) {
-                cardClass += " bg-secondary text-light"; 
+                cardClass += " bg-secondary text-light";
                 buttonClass += " bg-light text-dark";
             }
-
+            
             htmlString += `\n
             <div class="${cardClass}" id="item-${id}">
                 <h2>
                     ${ item.name } 
                 </h2>
                 <div>
-                    <button class="${buttonClass}" onclick="incrementItem(${id})">▲</button> 
+                    <button class="${buttonClass}" onclick="incrementItem(${id})">+</button> 
                     ${ item.amount } 
-                    <button ${item.amount > 0 ? "" : "disabled"} class="${buttonClass}" onclick="decrementItem(${id})">▼</button> 
+                    <button ${item.amount > 0 ? "" : "disabled"} class="${buttonClass}" onclick="decrementItem(${id})">-</button> 
                 </div>
-                <div>
+                <div class= "rounded my-1 py-2">
                     ${ item.description }
                 </div>
                 <button class="btn btn-sm btn-danger absolute" onclick="deleteItem(${id})">X</button>
